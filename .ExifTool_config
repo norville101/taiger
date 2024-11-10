@@ -1,0 +1,49 @@
+# NOTE: All tag names used in the following tables are case sensitive.
+
+# The %Image::ExifTool::UserDefined hash defines new tags to be added
+# to existing tables.
+%Image::ExifTool::UserDefined = (
+    # new PNG tags are added to the PNG::TextualData table:
+    'Image::ExifTool::PNG::TextualData' => {
+        # PNG:Parameters
+        parameters => { },
+        # PNG:NewPngTag2
+        # NewPngTag2 => { iTXt => 1 }, # (force this tag to be written as iTXt)
+        GenInfo => { },
+        GenCode => { },
+    },
+);
+
+# User-defined file types to recognize
+# %Image::ExifTool::UserDefined::FileTypes = (
+#     XXX => { # <-- the extension of the new file type (case insensitive)
+#         # BaseType specifies the format upon which this file is based (case
+#         # sensitive).  If BaseType is defined, then the file will be fully
+#         # supported, and in this case the Magic pattern should not be defined
+#         BaseType => 'TIFF',
+#         MIMEType => 'image/x-xxx',
+#         Description => 'My XXX file type',
+#         # if the BaseType is writable by ExifTool, then the new file type
+#         # will also be writable unless otherwise specified, like this:
+#         Writable => 0,
+#     },
+#     YYY => {
+#         # without BaseType, the file will be recognized but not supported
+#         Magic => '0123abcd',    # regular expression to match at start of file
+#         MIMEType => 'application/test',
+#         Description => 'My YYY file type',
+#     },
+#     ZZZ => {
+#         # if neither BaseType nor Magic are defined, the file will be
+#         # recognized by extension only.  MIMEType will be application/unknown
+#         # unless otherwise specified
+#         Description => 'My ZZZ file type',
+#     },
+#     # if only BaseType is specified, then the following simplified syntax
+#     # may be used.  In this example, files with extension "TTT" will be
+#     # processed as JPEG files
+#     TTT => 'JPEG',
+# );
+
+#------------------------------------------------------------------------------
+1;  #end
