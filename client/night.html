@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Form to NightSaver</title>
+</head>
+  <body>
+    <div class="container">
+      <div class="card card-color cardleft">
+        <p>
+          Paste a captured FireBase channel (filter="channel?gsessionid=") into the field below and click Submit.
+          This will enqueue the object(s) for download and tag processing.  You get the objects from the Chrome
+          inspector's Network tab, by watching a service request
+          images or jobs.
+        </p>
+      </div>
+      <div class="card card-color cardright" style="overflow-y: scroll; max-height: 90vh;"><ul id="events"></ul></div>
+      <div class="card card-color cardleft">
+        <form action="" id="nightShadeForm">
+            <div class="form-row">
+                <label for="raw">FireBase channel</label>  <span id="error" style="color:red"></span>
+                <textarea class="input-text input-text-block w-100" id="raw" name="raw"></textarea>
+            </div>
+            <div class="form-row mx-auto">
+                <button type="submit" class="btn-submit" id="btnSubmitNight">
+                Submit
+                </button>
+            </div>
+        </form>
+      </div>
+    </div>
+    <script type="module" src="submit.js"></script>
+    <script>
+      const evtSource = new EventSource("events")
+      evtSource.onmessage = (event) => {
+        const newElement = document.createElement("li")
+        const eventList = document.getElementById("events")
+        newElement.textContent = event.data
+        eventList.insertBefore(newElement, eventList.firstChild)
+        // eventList.appendChild(newElement)
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Novita API Front-end</title>
+</head>
+  <body>
+    <div class="container">
+      <div class="card card-color cardright" style="overflow-y: scroll; max-height: 90vh;"><ul id="events"></ul></div>
+      <div class="card card-color cardleft">
+        <form action="" id="novitaForm">
+          <div class="form-row">
+              <label for="model_name">model_name</label>
+              <input type="text" class="input-text input-text-block w-100" id="model_name" name="model_name" />
+          </div>
+          <div class="form-row">
+              <label for="prompt">prompt</label>
+              <textarea class="input-text input-text-block w-100" style="min-height: 20vh" id="prompt" name="prompt" maxlength="1024"></textarea>
+          </div>
+          <div class="form-row">
+            <label for="negative_prompt">negative_prompt</label>
+            <textarea class="input-text input-text-block w-100" style="min-height: 10vh" id="negative_prompt" name="negative_prompt" maxlength="1024"></textarea>
+          </div>
+          <div class="form-row">
+            <label for="steps">steps</label>
+            <input type="number" min="1" max="100" class="input-text input-text-block w-100" id="steps" name="steps" />
+          </div>
+          <div class="form-row">
+            <label for="seed">seed</label>
+            <input type="number" min="-1" max="4294967295" class="input-text input-text-block w-100" id="seed" name="seed" />
+          </div>
+          <div class="form-row">
+            <label for="width">width</label>
+            <input type="number" min="128" max="2048" class="input-text input-text-block w-100" id="width" name="width" />
+          </div>
+          <div class="form-row">
+            <label for="height">height</label>
+            <input type="number" min="128" max="2048" class="input-text input-text-block w-100" id="height" name="height" />
+          </div>
+          <div class="form-row">
+            <label for="guidance_scale">guidance_scale</label>
+            <input type="number" min="1.0" max="30.0" step="0.1" class="input-text input-text-block w-100" id="guidance_scale" name="guidance_scale" />
+          </div>
+          <div class="form-row">
+            <label for="image_num">image_num (i.e. number of images)</label>
+            <input type="number" min="1" max="8" class="input-text input-text-block w-100" id="image_num" name="image_num"></input>
+          </div>
+          <div class="form-row">
+            <label for="sampler_name">sampler_name</label>
+            <select name="sampler_name" id="sampler_name">
+              <option value="">--Please choose an option--</option>
+              <option value="Euler">Euler</option>
+              <option value="Euler a">Euler a</option>
+              <option value="LMS">LMS</option>
+              <option value="Heun">Heun</option>
+              <option value="DPM2">DPM2</option>
+              <option value="DPM2 a">DPM2 a</option>
+              <option value="DPM++ 2S a">DPM++ 2S a</option>
+              <option value="DPM++ 2M">DPM++ 2M</option>
+              <option value="DPM++ SDE">DPM++ SDE</option>
+              <option value="DPM fast">DPM fast</option>
+              <option value="DPM adaptive">DPM adaptive</option>
+              <option value="LMS Karras">LMS Karras</option>
+              <option value="DPM2 Karras">DPM2 Karras</option>
+              <option value="DPM2 a Karras">DPM2 a Karras</option>
+              <option value="DPM++ 2S a Karras">DPM++ 2S a Karras</option>
+              <option value="DPM++ 2M Karras">DPM++ 2M Karras</option>
+              <option value="DPM++ SDE Karras">DPM++ SDE Karras</option>
+              <option value="DDIM">DDIM</option>
+              <option value="PLMS">PLMS</option>
+              <option value="UniPC">UniPC</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="lora_name_0">LoRA (name)</label>
+            <input type="text"  class="input-text input-text-block w-100" id="lora_name_0" name="lora_name_0"></input>
+          </div>
+          <div class="form-row">
+            <label for="lora_strength_0">LoRA (strength)</label>
+            <input type="number" min="0.0" max="1.0" step="0.1" class="input-text input-text-block w-100" id="lora_strength_0" name="lora_strength_0"></input>
+          </div>
+          <!--<div class="form-row">
+            <label for="sd_vae">VAE</label>
+            <input type="text"  class="input-text input-text-block w-100" id="sd_vae" name="sd_vae"></input>
+          </div>
+          <div class="form-row">
+            <label for="embeddings">Text Embeddings</label>
+            <input type="text"  class="input-text input-text-block w-100" id="embeddings" name="embeddings"></input>
+          </div>
+          <div class="form-row">
+            <label for="hires_fix">HiRes Fix</label>
+            <input type="text"  class="input-text input-text-block w-100" id="hires_fix" name="hires_fix"></input>
+          </div>
+          <div class="form-row">
+            <label for="refiner">Refiner</label>
+            <input type="text"  class="input-text input-text-block w-100" id="refiner" name="refiner"></input>
+          </div> -->
+          <div class="form-row">
+            <input type="checkbox" class="" id="enable_transparent_background" name="enable_transparent_background" />
+            <label for="enable_transparent_background" style="display:inline">Transparent Background</label>
+          </div>
+          <div class="form-row">
+            <input type="checkbox" class="" id="restore_faces" name="restore_faces" />
+            <label for="restore_faces" style="display:inline">Restore Faces</label>
+          </div>
+          <div class="form-row mx-auto">
+            <button type="submit" class="btn-submit" id="btnSubmit">
+            Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script type="module" src="submit.js"></script>
+    <script>
+      const evtSource = new EventSource("events")
+      evtSource.onmessage = (event) => {
+        const newElement = document.createElement("li")
+        const eventList = document.getElementById("events")
+        newElement.textContent = event.data
+        eventList.insertBefore(newElement, eventList.firstChild)
+        // eventList.appendChild(newElement)
+      }
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search)
+        for (const [key, value] of urlParams.entries()) {
+          const field = document.querySelector(`[name="${key}"]`)
+          if (field) {
+            field.value = value
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

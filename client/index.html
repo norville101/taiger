@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Form to API</title>
+</head>
+  <body>
+    <div class="container">
+      <div class="card card-color cardleft">
+        <p>
+          Paste a JSON array or object into the field below and click Submit. This will enqueue the object(s) for download
+          and tag processing.  You get the objects from the Chrome inspector's Network tab, by watching a service request
+          images or jobs.  Objects from the following services are supported:
+        </p>
+        <ol>
+          <li>starryai.com (grab JSON from either <a href="https://starryai.com/app/my-creations">my creations</a> or
+            <a href="https://starryai.com/app/explore">explore</a>)</li>
+          <li>dezgo.com (retrieve JSON via their API)</li>
+          <li>happyaccidents.ai (grab JSON from your <a href="https://www.happyaccidents.ai/gallery">gallery</a> page)</li>
+          <li>unstability.ai (grab JSON from your <a href="https://www.unstability.ai/history">history</a> page)</li>
+          <li>civitai.com (grab JSON at the Feed tab of the <a href="https://civitai.com/generate">generate</a> page)</li>
+          <li>mage.space (grab JSON at your user page at https://mage.space/u/UserName)</li>
+        </ol>
+      </div>
+      <div class="card card-color cardright" style="overflow-y: scroll; max-height: 90vh;"><ul id="events"></ul></div>
+      <div class="card card-color cardleft">
+        <form action="" id="sampleForm">
+            <div class="form-row">
+                <label for="json">JSON</label>  <span id="error" style="color:red"></span>
+                <textarea class="input-text input-text-block w-100" id="json" name="json"></textarea>
+            </div>
+            <div class="form-row mx-auto">
+                <button type="submit" class="btn-submit" id="btnSubmit">
+                Submit
+                </button>
+            </div>
+        </form>
+      </div>
+      <div class="card card-color cardleft">
+        <form action="" id="renamerForm">
+            <div class="form-row">
+                <label for="renamer">Rename files in dir...</label>
+                <input class="input-text input-text-block w-100" id="renamer" name="dir"/>
+            </div>
+            <div class="form-row mx-auto">
+                <button type="submit" class="btn-submit" id="btnSubmitClean">
+                Rename
+                </button>
+            </div>
+        </form>
+      </div>
+    </div>
+    <script type="module" src="submit.js"></script>
+    <script>
+      const evtSource = new EventSource("events")
+      evtSource.onmessage = (event) => {
+        const newElement = document.createElement("li")
+        const eventList = document.getElementById("events")
+        newElement.textContent = event.data
+        eventList.insertBefore(newElement, eventList.firstChild)
+        // eventList.appendChild(newElement)
+      }
+    </script>
+  </body>
+</html>

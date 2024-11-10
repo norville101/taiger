@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Form to Fetch Creations</title>
+</head>
+  <body>
+    <div class="container">
+      <div class="card card-color cardleft">
+        <p>
+          Paste a copied Fetch request (for example, from Nightcafe, filter="creations?query=user-liked") into
+          the field below and click Submit. This will make the indicated request and continue calling further
+          requests until a previously-encountered creation is encountered, at which time all of the creations
+          will be downloaded and tagged.
+        </p>
+      </div>
+      <div class="card card-color cardright" style="overflow-y: scroll; max-height: 90vh;"><ul id="events"></ul></div>
+      <div class="card card-color cardleft">
+        <form action="" id="fetchForm">
+            <div class="form-row">
+                <label for="fetch">fetch request</label>  <span id="error" style="color:red"></span>
+                <textarea class="input-text input-text-block w-100" id="fetch" name="fetch"></textarea>
+            </div>
+            <div class="form-row mx-auto">
+                <button type="submit" class="btn-submit" id="btnSubmitFetch">
+                Submit
+                </button>
+            </div>
+        </form>
+      </div>
+    </div>
+    <script type="module" src="submit.js"></script>
+    <script>
+      const evtSource = new EventSource("events")
+      evtSource.onmessage = (event) => {
+        const newElement = document.createElement("li")
+        const eventList = document.getElementById("events")
+        newElement.textContent = event.data
+        eventList.insertBefore(newElement, eventList.firstChild)
+        // eventList.appendChild(newElement)
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "users": {
+    "S4mpl3Us3rIdxxxxxxxxxxxxxxxx": "SampleUserName"
+  },
+  "headers": {
+    "authority": "app.starryai.com",
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9,de;q=0.8",
+    "authorization": "",
+    "content-type": "application/json",
+    "dnt": "1",
+    "origin": "https://starryai.com",
+    "platform": "web",
+    "recaptchatoken": "",
+    "referer": "https://starryai.com/",
+    "sec-ch-ua": "\"Google Chrome\";v=\"122\", \"Chromium\";v=\"122\", \"Not?A_Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+  }
+}
