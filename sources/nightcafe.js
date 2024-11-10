@@ -296,6 +296,10 @@ async function registerAsLiked (username, docArray) {
   return fs.promises.writeFile(cacheName, JSON.stringify(cacheArray))
 }
 
+function getUsers () {
+  return Object.values(config.users)
+}
+
 function getUserName (userId) {
   let result = config.users[userId]
   if (!result) {
@@ -486,5 +490,6 @@ module.exports = {
   registerAsDownloaded,
   getCreationCache,
   getUserName,
+  getUsers,
   registerAsLiked,
 }
